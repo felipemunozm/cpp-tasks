@@ -17,7 +17,7 @@ public:
         std::ofstream outputFile(fileName, std::ios::binary | std::ios::app);
         if (outputFile.is_open())
         {
-            outputFile.write(reinterpret_cast<const char *>(&data), sizeof(data));
+            outputFile.write(reinterpret_cast<const char *>(&data), sizeof(T));
             outputFile.close();
             std::cout << "Written to file: " << fileName << std::endl;
         }
@@ -31,23 +31,31 @@ public:
 
     static T *searchRegistry(const std::string &fileName, const int &id)
     {
-        T retrivedData;
+        
         std::ifstream inputFile(fileName, std::ios::binary);
         if (inputFile.is_open())
-        {
+        { 
+            T *foundData = nullptr;
             while (true)
             {
-                
-                if (!inputFile.read(reinterpret_cast<char *>(&retrivedData), sizeof(retrivedData)))
+                T currentData;
+                if (!inputFile.read(reinterpret_cast<char *>(&currentData), sizeof(T)))
                 {
                     break;
                 }
-                if (retrivedData.id == id)
+                if (currentData.id == id)
                 {
-                    std::cout << "Encontrado registro con Id: " << retrivedData.id << std::endl;
+                    std::cout << "Encontrado registro con Id: " << currentData.title << std::endl;
+
                     inputFile.close();
-                    T *returnPointer = &retrivedData;
-                    return returnPointer;
+                    std::cout << "Archivo cerrado" << std::endl;
+                    std::cout << "Estructura completa encontrada:" << std::endl;
+                    std::cout << "\tretrivedData.id " << currentData.id << std::endl;
+                    std::cout << "\tretrivedData.title " << currentData.title << std::endl;
+                    std::cout << "\tretrivedData.description " << currentData.description << std::endl;
+                    foundData = new T(currentData);
+                    std::cout << "Allocated memory" << std::endl;
+                    return foundData;
                 }
             }
         }

@@ -1,10 +1,7 @@
 #include "Task.hpp"
-
+#include <cstring>
 Task::Task() {}
-Task::Task(TaskData &taskData)
-{
-    this->taskData = taskData;
-}
+
 Task::~Task() {}
 
 void Task::setId(const int &id)
@@ -16,48 +13,48 @@ int Task::getId()
     return this->taskData.id;
 }
 
-void Task::setTitle(const std::string &title)
+void Task::setTitle(const char *title)
 {
-    this->taskData.title = title;
+    std::strcpy(this->taskData.title, title);
 }
 
-std::string Task::getTitle()
+char* Task::getTitle()
 {
     return this->taskData.title;
 }
 
-void Task::setDescription(const std::string &description)
+void Task::setDescription(const char *description)
 {
-    this->taskData.description = description;
+    std::strcpy(this->taskData.description,description);
 }
 
-std::string Task::getDescription()
+char *Task::getDescription()
 {
     return this->taskData.description;
 }
 
-void Task::setCreationDate(const std::tm &creationDate)
+void Task::setCreationDate(const char *creationDate)
 {
-    this->taskData.creationDate = creationDate;
+    std::strcpy(this->taskData.creationDate, creationDate);
 }
-std::tm Task::getCreationDate()
+char * Task::getCreationDate()
 {
     return this->taskData.creationDate;
 }
 
-void Task::setDueDate(const std::tm &dueDate)
+void Task::setDueDate(const char *dueDate)
 {
-    this->taskData.dueDate = dueDate;
+    std::strcpy(this->taskData.dueDate, dueDate);
 }
-std::tm Task::getDueDate()
+char *Task::getDueDate()
 {
     return this->taskData.dueDate;
 }
-void Task::setcompletionDate(const std::tm &completionDate)
+void Task::setCompletionDate(const char *completionDate)
 {
-    this->taskData.completionDate = completionDate;
+    std::strcpy(this->taskData.completionDate, completionDate);
 }
-std::tm Task::getCompletionDate()
+char *Task::getCompletionDate()
 {
     return this->taskData.completionDate;
 }
@@ -66,7 +63,7 @@ void Task::toString() {
     std::cout << "TaskData: \n\tid: " << this->taskData.id << std::endl;
     std::cout << "\ttitle: " << this->taskData.title << std::endl;
     std::cout << "\tdescription: " << this->taskData.description << std::endl;
-    std::cout << "\tYear: " << this->taskData.creationDate.tm_year + 1900 << std::endl;    
+    std::cout << "\tcreationDate: " << this->taskData.creationDate << std::endl;    
 }
 
 void Task::toString(TaskData data) {
@@ -74,5 +71,9 @@ void Task::toString(TaskData data) {
         std::cout << "TaskData: \n\tid: " << data.id << std::endl;
         std::cout << "\ttitle: " << data.title << std::endl;
         std::cout << "\tdescription: " << data.description << std::endl;
-        std::cout << "\tYear: " << data.creationDate.tm_year + 1900 << std::endl;
-    }
+        std::cout << "\tcreationDate: " << data.creationDate << std::endl;
+}
+
+TaskData Task::getTaskData() {
+    return this->taskData;
+}

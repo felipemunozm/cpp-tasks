@@ -1,24 +1,28 @@
 #include "model/Task.hpp"
 #include "utils/FileUtils.hpp"
-
+#include "utils/TimeUtils.hpp"
 
 int main()
 {
     std::time_t currentTime = std::time(nullptr);
     std::tm *currentLocalTime = std::localtime(&currentTime);
-    TaskData taskData;
+    
 
-    taskData.id = 1;
-    taskData.title = "title";
-    taskData.description = "description";
-    taskData.creationDate = *currentLocalTime;
-    taskData.dueDate = *currentLocalTime;
-    taskData.completionDate = *currentLocalTime;
+    Task task;
+    task.setId(1);
+    task.setTitle("title");
+    task.setDescription("description");
+    task.setCreationDate(TimeUtils_getCurrentTimeString());
+    task.setDueDate(TimeUtils_getCurrentTimeString());
+    task.setCompletionDate(TimeUtils_getCurrentTimeString());
+    TaskData taskData = task.getTaskData();
     Task::toString(taskData);
 
     FileUtils<TaskData>::writeToFile(TASK_FILENAME, taskData);
 
     TaskData *taskDataRetrived = FileUtils<TaskData>::searchRegistry(TASK_FILENAME, 1);
+    
+    std::cout << "recibido el Puntero de retorno" << std::endl;
     Task::toString(*taskDataRetrived);
     delete taskDataRetrived;
     return 0;

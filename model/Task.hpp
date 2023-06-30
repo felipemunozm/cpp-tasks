@@ -11,11 +11,11 @@
 struct TaskData
 {
     int id;
-    std::string title;
-    std::string description;
-    std::tm creationDate;
-    std::tm dueDate;
-    std::tm completionDate;
+    char title[50];
+    char description[50];
+    char creationDate[50];
+    char dueDate[50];
+    char completionDate[50];
 };
 
 class Task
@@ -25,30 +25,31 @@ private:
 
 public:
     Task();
-    Task(TaskData &data);
     ~Task();
 
     void setId(const int &id);
     int getId();
 
-    std::string getTitle();
-    void setTitle(const std::string &title);
+    char *getTitle();
+    void setTitle(const char *title);
 
-    std::string getDescription();
-    void setDescription(const std::string &description);
+    char *getDescription();
+    void setDescription(const char *description);
 
-    void setCreationDate(const std::tm &creationDate);
-    std::tm getCreationDate();
+    void setCreationDate(const char *creationDate);
+    char *getCreationDate();
 
-    void setDueDate(const std::tm &dueDate);
-    std::tm getDueDate();
+    void setDueDate(const char *dueDate);
+    char *getDueDate();
 
-    void setcompletionDate(const std::tm &completionDate);
-    std::tm getCompletionDate();
+    void setCompletionDate(const char *completionDate);
+    char *getCompletionDate();
 
     void toString();
 
     static void toString(TaskData data);
+
+    TaskData getTaskData();
 };
 
 #endif
