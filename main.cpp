@@ -17,5 +17,9 @@ int main()
     Task::toString(taskData);
 
     FileUtils<TaskData>::writeToFile(TASK_FILENAME, taskData);
+
+    TaskData *taskDataRetrived = FileUtils<TaskData>::searchRegistry(TASK_FILENAME, 1);
+    Task::toString(*taskDataRetrived);
+    delete taskDataRetrived;
     return 0;
 }

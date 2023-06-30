@@ -46,12 +46,9 @@ public:
     void setcompletionDate(const std::tm &completionDate);
     std::tm getCompletionDate();
 
-    static void toString(TaskData data) {
-        std::cout << "TaskData: \n\tid: " << data.id << std::endl;
-        std::cout << "\ttitle: " << data.title << std::endl;
-        std::cout << "\tdescription: " << data.description << std::endl;
-        std::cout << "\tYear: " << data.creationDate.tm_year + 1900 << std::endl;
-    }
+    void toString();
+
+    static void toString(TaskData data);
 };
 
 #endif

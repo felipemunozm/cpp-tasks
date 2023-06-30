@@ -19,7 +19,7 @@ public:
         {
             outputFile.write(reinterpret_cast<const char *>(&data), sizeof(data));
             outputFile.close();
-            std::cout << "Written to file: " << fileName << " and TaskData: " << reinterpret_cast<const char *>(&data) << std::endl;
+            std::cout << "Written to file: " << fileName << std::endl;
         }
         else
         {
@@ -29,22 +29,25 @@ public:
         return true;
     }
 
-    static T *searchRegistry(const std::string &fileName, const T &data)
+    static T *searchRegistry(const std::string &fileName, const int &id)
     {
+        T retrivedData;
         std::ifstream inputFile(fileName, std::ios::binary);
         if (inputFile.is_open())
         {
             while (true)
             {
-                T retrivedData;
+                
                 if (!inputFile.read(reinterpret_cast<char *>(&retrivedData), sizeof(retrivedData)))
                 {
                     break;
                 }
-                if (retrivedData.id == data.id)
+                if (retrivedData.id == id)
                 {
+                    std::cout << "Encontrado registro con Id: " << retrivedData.id << std::endl;
                     inputFile.close();
-                    return &retrivedData;
+                    T *returnPointer = &retrivedData;
+                    return returnPointer;
                 }
             }
         }

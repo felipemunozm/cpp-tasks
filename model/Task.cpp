@@ -61,3 +61,18 @@ std::tm Task::getCompletionDate()
 {
     return this->taskData.completionDate;
 }
+
+void Task::toString() {
+    std::cout << "TaskData: \n\tid: " << this->taskData.id << std::endl;
+    std::cout << "\ttitle: " << this->taskData.title << std::endl;
+    std::cout << "\tdescription: " << this->taskData.description << std::endl;
+    std::cout << "\tYear: " << this->taskData.creationDate.tm_year + 1900 << std::endl;    
+}
+
+void Task::toString(TaskData data) {
+        std::cout << "Starting printing..." << std::endl;
+        std::cout << "TaskData: \n\tid: " << data.id << std::endl;
+        std::cout << "\ttitle: " << data.title << std::endl;
+        std::cout << "\tdescription: " << data.description << std::endl;
+        std::cout << "\tYear: " << data.creationDate.tm_year + 1900 << std::endl;
+    }
