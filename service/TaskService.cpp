@@ -4,6 +4,7 @@ TaskService::TaskService() {}
 
 TaskService::~TaskService() {}
 
-Task TaskService::saveTask(const Task &task) {
-    
+Task *TaskService::saveTask(const Task &task)
+{
+    return nullptr;
 }
