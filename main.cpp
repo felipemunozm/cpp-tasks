@@ -4,10 +4,6 @@
 
 int main()
 {
-    std::time_t currentTime = std::time(nullptr);
-    std::tm *currentLocalTime = std::localtime(&currentTime);
-    
-
     Task task;
     task.setId(1);
     task.setTitle("title");

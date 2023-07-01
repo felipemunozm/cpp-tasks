@@ -46,15 +46,8 @@ public:
                 if (currentData.id == id)
                 {
                     std::cout << "Encontrado registro con Id: " << currentData.title << std::endl;
-
                     inputFile.close();
-                    std::cout << "Archivo cerrado" << std::endl;
-                    std::cout << "Estructura completa encontrada:" << std::endl;
-                    std::cout << "\tretrivedData.id " << currentData.id << std::endl;
-                    std::cout << "\tretrivedData.title " << currentData.title << std::endl;
-                    std::cout << "\tretrivedData.description " << currentData.description << std::endl;
                     foundData = new T(currentData);
-                    std::cout << "Allocated memory" << std::endl;
                     return foundData;
                 }
             }

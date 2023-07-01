@@ -1,9 +1,5 @@
 #ifndef _TASK_HPP_
 #define _TASK_HPP_ 1
-#include <string>
-#include <ctime>
-#include <iostream>
-
 // Nombre de archivo a utilizar para almacenar estos registros
 #define TASK_FILENAME "Task.data"
 #define TASK_INDEXNAME "Task.idx"
