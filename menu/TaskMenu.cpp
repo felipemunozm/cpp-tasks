@@ -19,10 +19,13 @@ void TaskMenu::displayMenu() {
         switch (choice) {
             case 1:
                 std::cout << "You selected Option 1" << std::endl;
+                break;
             case 2:
                 std::cout << "You selected Option 2" << std::endl;
+                break;
             case 3:
                 std::cout << "You selected Option 3" << std::endl;
+                break;
             case 0:
                 std::cout << "Exiting..." << std::endl;
                 break;

@@ -7,7 +7,7 @@ public:
     MenuBase();
     ~MenuBase();
 
-    virtual void displayMenu();
+    virtual void displayMenu() = 0;
 };
 
 
