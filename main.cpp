@@ -1,6 +1,7 @@
 #include "model/Task.hpp"
 #include "utils/FileUtils.hpp"
 #include "utils/TimeUtils.hpp"
+#include "menu/Initial.hpp"
 
 int main()
 {
@@ -21,5 +22,9 @@ int main()
     std::cout << "recibido el Puntero de retorno" << std::endl;
     Task::toString(*taskDataRetrived);
     delete taskDataRetrived;
+
+    Initial initial;
+    initial.displayMenu();
+
     return 0;
 }

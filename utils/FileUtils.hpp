@@ -45,7 +45,7 @@ public:
                 }
                 if (currentData.id == id)
                 {
-                    std::cout << "Encontrado registro con Id: " << currentData.title << std::endl;
+                    std::cout << "Encontrado registro con Id: " << currentData.id << std::endl;
                     inputFile.close();
                     foundData = new T(currentData);
                     return foundData;
