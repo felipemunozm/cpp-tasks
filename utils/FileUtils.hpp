@@ -14,6 +14,10 @@ public:
     ~FileUtils();
     static bool writeToFile(const std::string &fileName, const T &data)
     {
+        if(!fileExists(fileName))
+            data.id = 1;
+        else
+            data.id = getNextIdFromFile(fileName);
         std::ofstream outputFile(fileName, std::ios::binary | std::ios::app);
         if (outputFile.is_open())
         {
@@ -57,6 +61,26 @@ public:
             std::cerr << "Failed to open the file " << fileName << " to read" << std::endl;
         }
         return nullptr;
+    }
+
+    static int getNextIdFromFile(const std::string &fileName) {
+        std::ifstream inputFile(fileName, std::ios::binary);
+        if(inputFile.is_open()) {
+            T lastData;
+            inputFile.seekg(-static_cast<std::streamoff>(sizeof(T)),std::ios::end);
+            inputFile.read(reinterpret_cast<char *>(&lastData), sizeof(T));
+            inputFile.close();
+            return ++lastData.id;
+        }
+        else
+            std::cerr << "Failed to open file " << fileName << std::endl;
+        return 0;
+    }
+
+    static bool fileExists(const std::string& fileName)
+    {
+        std::ifstream file(fileName);
+        return file.good();
     }
 };
 

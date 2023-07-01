@@ -23,6 +23,9 @@ int main()
     Task::toString(*taskDataRetrived);
     delete taskDataRetrived;
 
+    int nextId = FileUtils<TaskData>::getNextIdFromFile(TASK_FILENAME);
+    std::cout << "NextId: " << nextId << std::endl;
+
     Initial initial;
     initial.displayMenu();
 
