@@ -5,4 +5,6 @@
 
 char *TimeUtils_getCurrentTimeString();
 
+bool TimeUtils_validateStringDateFormat(const std::string &input);
+
 #endif

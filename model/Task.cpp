@@ -68,7 +68,7 @@ void Task::toString() {
     std::cout << "\tcreationDate: " << this->taskData.creationDate << std::endl;    
 }
 
-void Task::toString(TaskData data) {
+void Task::toString(TaskData &data) {
         std::cout << "Starting printing..." << std::endl;
         std::cout << "TaskData: \n\tid: " << data.id << std::endl;
         std::cout << "\ttitle: " << data.title << std::endl;
@@ -76,6 +76,10 @@ void Task::toString(TaskData data) {
         std::cout << "\tcreationDate: " << data.creationDate << std::endl;
 }
 
-TaskData Task::getTaskData() {
+void Task::setTaskData(TaskData &data) {
+    this->taskData = data;
+}
+
+TaskData Task::getTaskData() const {
     return this->taskData;
 }

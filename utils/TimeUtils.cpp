@@ -4,6 +4,7 @@
 #include <string>
 #include <cstring>
 #include <iomanip>
+#include <regex>
 
 char* TimeUtils_getCurrentTimeString() {
     auto currentTime = std::chrono::system_clock::now();
@@ -17,4 +18,9 @@ char* TimeUtils_getCurrentTimeString() {
     std::strcpy(result, timeString.c_str());
 
     return result;
+}
+
+bool TimeUtils_validateStringDateFormat(const std::string &userInput) {
+    std::regex pattern(R"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})");
+    return std::regex_match(userInput, pattern);
 }

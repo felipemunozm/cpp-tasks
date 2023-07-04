@@ -5,26 +5,26 @@
 
 int main()
 {
-    Task task;
-    task.setId(1);
-    task.setTitle("title");
-    task.setDescription("description");
-    task.setCreationDate(TimeUtils_getCurrentTimeString());
-    task.setDueDate(TimeUtils_getCurrentTimeString());
-    task.setCompletionDate(TimeUtils_getCurrentTimeString());
-    TaskData taskData = task.getTaskData();
-    Task::toString(taskData);
+    // Task task;
+    // task.setId(1);
+    // task.setTitle("title");
+    // task.setDescription("description");
+    // task.setCreationDate(TimeUtils_getCurrentTimeString());
+    // task.setDueDate(TimeUtils_getCurrentTimeString());
+    // task.setCompletionDate(TimeUtils_getCurrentTimeString());
+    // TaskData taskData = task.getTaskData();
+    // Task::toString(taskData);
 
-    FileUtils<TaskData>::writeToFile(TASK_FILENAME, taskData);
+    // FileUtils<TaskData>::writeToFile(TASK_FILENAME, taskData);
 
-    TaskData *taskDataRetrived = FileUtils<TaskData>::searchRegistry(TASK_FILENAME, 1);
+    // TaskData *taskDataRetrived = FileUtils<TaskData>::searchRegistry(TASK_FILENAME, 1);
     
-    std::cout << "recibido el Puntero de retorno" << std::endl;
-    Task::toString(*taskDataRetrived);
-    delete taskDataRetrived;
+    // std::cout << "recibido el Puntero de retorno" << std::endl;
+    // Task::toString(*taskDataRetrived);
+    // delete taskDataRetrived;
 
-    int nextId = FileUtils<TaskData>::getNextIdFromFile(TASK_FILENAME);
-    std::cout << "NextId: " << nextId << std::endl;
+    // int nextId = FileUtils<TaskData>::getNextIdFromFile(TASK_FILENAME);
+    // std::cout << "NextId: " << nextId << std::endl;
 
     Initial initial;
     initial.displayMenu();

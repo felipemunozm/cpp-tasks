@@ -13,7 +13,7 @@ private:
 public:
     FileUtils();
     ~FileUtils();
-    static bool writeToFile(const std::string &fileName, T &data)
+    static T writeToFile(const std::string &fileName, T &data)
     {
         if(!fileExists(fileName))
             data.id = 1;
@@ -29,9 +29,9 @@ public:
         else
         {
             std::cerr << "Failed to open the file " << fileName << std::endl;
-            return false;
+            return T();
         }
-        return true;
+        return data;
     }
 
     static T *searchRegistry(const std::string &fileName, const int &id)
@@ -117,6 +117,7 @@ public:
                 indexFile.write(reinterpret_cast<const char*>(&pos), sizeof(std::streampos));
             }
             indexFile.close();
+            std::cout << "Index was written" << std::endl;
         }
         else {
             std::cerr << "Failed to write to file " << indexFileName << std::endl;

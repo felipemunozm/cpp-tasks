@@ -4,8 +4,10 @@
 
 class TaskMenu : MenuBase
 {
+private:
+    void addTaskMenu();
 public:
-    TaskMenu(/* args */);
+    TaskMenu();
     ~TaskMenu();
     void displayMenu() override;
 };

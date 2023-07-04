@@ -43,9 +43,10 @@ public:
 
     void toString();
 
-    static void toString(TaskData data);
+    static void toString(TaskData &data);
 
-    TaskData getTaskData();
+    void setTaskData(TaskData &data);
+    TaskData getTaskData() const;
 };
 
 #endif
