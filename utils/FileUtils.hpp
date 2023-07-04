@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <unordered_map>
 
 template <typename T>
 class FileUtils
@@ -12,7 +13,7 @@ private:
 public:
     FileUtils();
     ~FileUtils();
-    static bool writeToFile(const std::string &fileName, const T &data)
+    static bool writeToFile(const std::string &fileName, T &data)
     {
         if(!fileExists(fileName))
             data.id = 1;
@@ -82,6 +83,46 @@ public:
         std::ifstream file(fileName);
         return file.good();
     }
+
+    template<typename Key>
+    static void createIndex(const std::string& fileName, const std::string &indexFileName, Key T:: *keyField) {
+            std::unordered_map<Key, std::streampos> index;
+            std::ifstream fileToIndex(fileName, std::ios::binary);
+            if(fileToIndex.is_open()) {
+                while(fileToIndex.peek() != EOF) {
+                    std::streampos pos = fileToIndex.tellg();
+                    T data;
+                    if(fileToIndex.read(reinterpret_cast<char*>(&data),sizeof(T))) {
+                        Key key = data.*keyField;
+                        index[key] = pos;
+                    }
+                }
+                fileToIndex.close();
+                writeIndexToFile<Key>(indexFileName, index);
+            }
+            else {
+                std::cerr << "Failed to write to file " << fileName << std::endl;
+            }
+    }
+
+    template<typename Key>
+    static void writeIndexToFile(const std::string &indexFileName, std::unordered_map<Key, std::streampos> &index) {
+        std::ofstream indexFile(indexFileName, std::ios::binary);
+        if(indexFile.is_open()) {
+            for(const auto &pair: index) {
+                Key key = pair.first;
+                std::streampos pos = pair.second;
+
+                indexFile.write(reinterpret_cast<const char*>(&key), sizeof(Key));
+                indexFile.write(reinterpret_cast<const char*>(&pos), sizeof(std::streampos));
+            }
+            indexFile.close();
+        }
+        else {
+            std::cerr << "Failed to write to file " << indexFileName << std::endl;
+        }
+    }
+
 };
 
 #endif
