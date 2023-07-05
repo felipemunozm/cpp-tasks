@@ -65,6 +65,7 @@ void Task::toString() {
     std::cout << "TaskData: \n\tid: " << this->taskData.id << std::endl;
     std::cout << "\ttitle: " << this->taskData.title << std::endl;
     std::cout << "\tdescription: " << this->taskData.description << std::endl;
+    std::cout << "\tdueDate: " << this->taskData.dueDate << std::endl;    
     std::cout << "\tcreationDate: " << this->taskData.creationDate << std::endl;    
 }
 

@@ -4,6 +4,8 @@
 #include "../utils/TimeUtils.hpp"
 #include "../service/TaskService.hpp"
 #include "../utils/FileUtils.hpp" 
+#include <limits>
+#include "../service/TaskService.hpp"
 
 TaskMenu::TaskMenu(){}
 
@@ -18,13 +20,14 @@ void TaskMenu::displayMenu() {
         std::cout << "(3) Delete Task by Id" << std::endl;
         std::cout << "(0) Return" << std::endl;
         std::cout << "Enter an option..." << std::endl;
-
+        std::cin.clear();
         std::cin >> choice;
 
         switch (choice) {
             case 1:
-                std::cout << "You selected Option 1:\n";
+                std::cout << "You selected Option 1:" << std::endl;
                 this->addTaskMenu();
+                break;
             case 2:
                 std::cout << "You selected Option 2" << std::endl;
                 break;
@@ -44,10 +47,11 @@ void TaskMenu::displayMenu() {
 
 
 void TaskMenu::addTaskMenu() {
+    std::cin.clear();
     std::string title, description, dueDate;
-    std::cout << "Please enter the following information: Tile:";
-    // std::cout << "Title: ";
-    std::cin >> title;
+    std::cout << "Please enter the following information:" << std::endl;
+    std::cout << "Title: ";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::getline(std::cin, title);
     std::cout << "Description: ";
     std::getline(std::cin, description);
@@ -62,8 +66,9 @@ void TaskMenu::addTaskMenu() {
     task.setTitle(title.c_str());
     task.setDescription(description.c_str());
     task.setDueDate(dueDate.c_str());
-    TaskData taskData = task.getTaskData();
-    TaskData data = FileUtils<TaskData>::writeToFile(TASK_FILENAME, taskData);
-    Task::toString(data);
-    FileUtils<TaskData>::createIndex<int>(TASK_FILENAME, TASK_INDEXNAME, &TaskData::id);
+    task.setCreationDate(TimeUtils_getCurrentTimeString());
+    TaskService taskService;
+    Task *responseTask = taskService.saveTask(task);
+    responseTask->toString();
+    delete responseTask;
 }
