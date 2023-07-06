@@ -25,3 +25,14 @@ Task* TaskService::getTask(const int &id) {
     }
     return nullptr;
 }
+
+void TaskService::deleteTask(const int &id) {
+    bool wasDeleted = FileUtils<TaskData>::deleteFromFile<int>(TASK_FILENAME, &TaskData::id, id);
+    if(wasDeleted) {
+        FileUtils<TaskData>::createIndex<int>(TASK_FILENAME, TASK_INDEXNAME, &TaskData::id);
+        std::cout << "Deleted Registry Id: " << id << std::endl;
+    }
+    else {
+        std::cout << "Registry was not deleted, Task Id: " << id << " is still in File" << std::endl;
+    }
+}

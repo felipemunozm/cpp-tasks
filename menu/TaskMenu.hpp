@@ -7,6 +7,7 @@ class TaskMenu : MenuBase
 private:
     void addTaskMenu();
     void searchTaskByIdMenu();
+    void deleteTaskMenu();
 public:
     TaskMenu();
     ~TaskMenu();

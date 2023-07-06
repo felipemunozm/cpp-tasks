@@ -124,6 +124,44 @@ public:
         }
     }
 
+    template<typename Key>
+    static bool deleteFromFile(const std::string &fileName, Key T:: *key, const Key &keyValue) {
+        std::string tempFileName = fileName + ".temp";
+        std::rename(fileName.c_str(), tempFileName.c_str());
+        std::ifstream inputFile(tempFileName, std::ios::binary);
+
+        if(!inputFile) {
+            std::cout << "File " << tempFileName << " not found." << std::endl;
+            return false;
+        }
+
+        std::ofstream outputFile(fileName, std::ios::binary);
+
+        if(!outputFile) {
+            std::cout << "File " << fileName << " not found." << std::endl;
+            return false;
+        }
+
+        T data;
+        while(inputFile.read(reinterpret_cast<char*>(&data), sizeof(T))) {
+            if(data.*key == keyValue) {
+                std::cout << "Omitting record with Id: " << data.*key << std::endl;
+            }
+            else {
+                outputFile.write(reinterpret_cast<char*>(&data), sizeof(T));
+                std::cout << "Writting record with Id: " << data.*key << std::endl;
+            }
+        }
+
+        inputFile.close();
+        outputFile.close();
+
+        int removedFileIndicator = std::remove(tempFileName.c_str());
+        if(removedFileIndicator) {
+            std::cout << "Temporarly file deleted " << std::endl;
+        }
+        return true;
+    }
 };
 
 #endif

@@ -31,7 +31,7 @@ void TaskMenu::displayMenu() {
                 this->searchTaskByIdMenu();
                 break;
             case 3:
-                std::cout << "You selected Option 3" << std::endl;
+                this->deleteTaskMenu();
                 break;
             case 0:
                 std::cout << "Exiting..." << std::endl;
@@ -83,4 +83,12 @@ void TaskMenu::searchTaskByIdMenu() {
     }
     else
         std::cout << "Task Not Found" << std::endl;
+}
+
+void TaskMenu::deleteTaskMenu() {
+    int id;
+    std::cout << "Enter the Task Id to delete: " << std::endl;
+    std::cin >> id;
+    TaskService taskService;
+    taskService.deleteTask(id);
 }
