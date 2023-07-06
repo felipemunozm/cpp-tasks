@@ -25,11 +25,10 @@ void TaskMenu::displayMenu() {
 
         switch (choice) {
             case 1:
-                std::cout << "You selected Option 1:" << std::endl;
                 this->addTaskMenu();
                 break;
             case 2:
-                std::cout << "You selected Option 2" << std::endl;
+                this->searchTaskByIdMenu();
                 break;
             case 3:
                 std::cout << "You selected Option 3" << std::endl;
@@ -47,7 +46,6 @@ void TaskMenu::displayMenu() {
 
 
 void TaskMenu::addTaskMenu() {
-    std::cin.clear();
     std::string title, description, dueDate;
     std::cout << "Please enter the following information:" << std::endl;
     std::cout << "Title: ";
@@ -71,4 +69,18 @@ void TaskMenu::addTaskMenu() {
     Task *responseTask = taskService.saveTask(task);
     responseTask->toString();
     delete responseTask;
+}
+
+void TaskMenu::searchTaskByIdMenu() {
+    int id;
+    std::cout << "Enter the Task Id to search: " << std::endl;
+    std::cin >> id;
+    TaskService taskService;
+    Task *task = taskService.getTask(id);
+    if(task) {
+        task->toString();
+        delete task;
+    }
+    else
+        std::cout << "Task Not Found" << std::endl;
 }

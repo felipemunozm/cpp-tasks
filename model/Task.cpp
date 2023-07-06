@@ -75,6 +75,7 @@ void Task::toString(TaskData &data) {
         std::cout << "\ttitle: " << data.title << std::endl;
         std::cout << "\tdescription: " << data.description << std::endl;
         std::cout << "\tcreationDate: " << data.creationDate << std::endl;
+        std::cout << "\tdueDate: " << data.dueDate << std::endl;
 }
 
 void Task::setTaskData(TaskData &data) {

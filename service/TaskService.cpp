@@ -14,3 +14,14 @@ Task* TaskService::saveTask(const Task &task)
     taskPtr->setTaskData(savedTaskData);
     return taskPtr;
 }
+
+Task* TaskService::getTask(const int &id) {
+    TaskData *taskDataPtr = FileUtils<TaskData>::searchRegistry(TASK_FILENAME, id);
+    if(taskDataPtr) {
+        Task *task;
+        task = new Task;
+        task->setTaskData(*taskDataPtr);
+        return task;
+    }
+    return nullptr;
+}
